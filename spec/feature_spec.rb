@@ -23,8 +23,9 @@ feature 'Oystercard Challenge', :feature do
     scenario 'completes a valid journey on touch out' do
       oystercard.touch_out(exit_station)
       expect(oystercard).not_to be_in_journey
-      expect(oystercard.journeys.last.entry_station).to be entry_station
-      expect(oystercard.journeys.last.exit_station).to be exit_station
+      oystercard.journey_log.journeys
+      expect(oystercard.journey_log.journeys.last.entry_station).to be entry_station
+      expect(oystercard.journey_log.journeys.last.exit_station).to be exit_station
     end
 
     scenario 'deducts fare given valid journey' do
@@ -45,9 +46,9 @@ feature 'Oystercard Challenge', :feature do
     scenario 'touch in again' do
       oystercard.touch_in(entry_station2)
       expect(oystercard).to be_in_journey
-      expect(oystercard.journeys.count).to eq 2
-      expect(oystercard.journeys.last.entry_station).to be entry_station2
-      expect(oystercard.journeys[-2]).to be_complete
+      expect(oystercard.journey_log.journeys.count).to eq 2
+      expect(oystercard.journey_log.journeys.last.entry_station).to be entry_station2
+      expect(oystercard.journey_log.journeys[-2]).to be_complete
     end
 
   end
@@ -58,18 +59,18 @@ feature 'Oystercard Challenge', :feature do
 
     scenario 'First use is a touch out' do
       oystercard.touch_out(exit_station2)
-      expect(oystercard.journeys.count).to eq 1
-      expect(oystercard.journeys.last).to be_complete
-      expect(oystercard.journeys.last.exit_station).to be exit_station2
+      expect(oystercard.journey_log.journeys.count).to eq 1
+      expect(oystercard.journey_log.journeys.last).to be_complete
+      expect(oystercard.journey_log.journeys.last.exit_station).to be exit_station2
     end
 
     scenario 'after a touch out' do
       oystercard.touch_in(entry_station)
       oystercard.touch_out(exit_station)
       oystercard.touch_out(exit_station2)
-      expect(oystercard.journeys.count).to eq 2
-      expect(oystercard.journeys.last).to be_complete
-      expect(oystercard.journeys.last.exit_station).to be exit_station2
+      expect(oystercard.journey_log.journeys.count).to eq 2
+      expect(oystercard.journey_log.journeys.last).to be_complete
+      expect(oystercard.journey_log.journeys.last.exit_station).to be exit_station2
     end
 
   end

@@ -4,6 +4,16 @@ require './lib/oystercard'
 require './lib/station'
 require './lib/journey'
 
+oystercard = Oystercard.new
+entry_station = Station.new('Oxford Circus', 1)
+exit_station = Station.new('Oxford Circus', 1)
+oystercard.top_up(10)
+oystercard.touch_in(entry_station)
+oystercard.touch_out(exit_station)
+oystercard.in_journey?
+p oystercard.journey_log
+
+=begin
 def set_balance
   card = Oystercard.new
   p card
@@ -83,7 +93,7 @@ store_journey
 
 def create_station
   name = 'Stratford'
-  zone = 3 
+  zone = 3
   p Station.new(name, zone)
 end
 
@@ -96,3 +106,4 @@ end
 
 # create new class Journey - start, finish, fare, complete?
 # fare method - penalty(6)/ minimum
+=end

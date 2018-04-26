@@ -5,40 +5,40 @@ class Journeylog
   end
 
   def start(station = nil)
-    current_journey.set_complete if in_journey?
+    @journey.set_complete if in_journey?
     create_journey(station)
   end
 
   def finish(station = nil)
-    current_journey.set_complete(station)
+    create_journey(station) if !in_journey?
+    @journey.set_complete(station) if in_journey?
   end
 
   def in_journey?
-    !current_journey.complete?
+    !!@journey && !@journey.complete?
   end
 
   def fare
-    current_journey.fare
+    @journey.fare
   end
-
-  private
 
   def journeys
     @journeys
   end
 
+  private
+
   def current_journey
-    create_journey if journeys.last.complete?
-    journeys.last
+    journeys.last.complete? ? create_journey : journeys.last
   end
 
   def create_journey(station)
-    journey = @journey_class.new(station)
-    save(journey)
+    @journey = @journey_class.new(station)
+    save(@journey)
   end
 
   def save(journey)
-    journeys << journey
+    journeys << @journey
   end
 
 end

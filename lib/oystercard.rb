@@ -1,6 +1,6 @@
-require_relative './journey'
-require_relative './station'
-require_relative './journey_log'
+# require_relative './journey'
+# require_relative './station'
+# require_relative './journey_log'
 
 class Oystercard
 
@@ -8,7 +8,7 @@ class Oystercard
   MAX_BALANCE = 90
   MIN_BALANCE = 1
 
-  attr_reader :balance, :entry_station, :journeys, :journey_log
+  attr_reader :balance, :entry_station, :journey_log, :journeys
 
   def initialize(balance: DEFAULT_BALANCE, journey_log: Journeylog.new)
     @balance = balance
@@ -33,6 +33,10 @@ class Oystercard
   def touch_out(exit_station)
     @journey_log.finish(exit_station)
     deduct(get_fare)
+  end
+
+  def journeys
+    @journeys = journey_log.journeys
   end
 
   private

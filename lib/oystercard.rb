@@ -1,7 +1,3 @@
-# require_relative './journey'
-# require_relative './station'
-# require_relative './journey_log'
-
 class Oystercard
 
   DEFAULT_BALANCE = 0

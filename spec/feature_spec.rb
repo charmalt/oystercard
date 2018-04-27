@@ -1,4 +1,5 @@
 feature 'Oystercard Challenge', :feature do
+
   let(:oystercard) { Oystercard.new }
   let(:entry_station) { Station.new('Oxford Circus', 1) }
   let(:exit_station) { Station.new('Oxford Circus', 1) }

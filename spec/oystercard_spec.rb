@@ -1,5 +1,5 @@
-
 describe Oystercard do
+  
   let(:fare) { 1 }
   let(:penalty_fare) { 6 }
   let(:max_balance) { Oystercard::MAX_BALANCE}

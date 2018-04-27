@@ -1,6 +1,6 @@
 class Journeylog
 
-  def initialize(journey_class = Journey)
+  def initialize(journey_class: Journey)
     @journey_class = journey_class
     @journeys = []
   end
@@ -13,7 +13,7 @@ class Journeylog
   def finish(station = nil)
     if !in_journey?
       create_journey(station)
-      @journey.set_complete
+      @journey.set_complete(station)
     end
     @journey.set_complete(station) if in_journey?
   end

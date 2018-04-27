@@ -58,7 +58,7 @@ feature 'Oystercard Challenge', :feature do
 
     let(:exit_station2) { Station.new('Notting Hill gate', 1) }
 
-    scenario 'First use is a touch out' do
+    scenario 'first use is a touch out' do
       oystercard.touch_out(exit_station2)
       expect(oystercard.journey_log.journeys.count).to eq 1
       expect(oystercard.journey_log.journeys.last).to be_complete
